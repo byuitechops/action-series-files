@@ -1,6 +1,5 @@
 /* Dependencies */
 const canvas = require('canvas-wrapper');
-const asyncLib = require('async');
 
 /* Actions */
 var actions = [
