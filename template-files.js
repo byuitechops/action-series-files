@@ -3,8 +3,7 @@ const canvas = require('canvas-wrapper');
 
 /* Actions */
 var actions = [
-    require('../actions/files-delete.js'),
-    POTATO
+    require('../actions/files-delete.js')
 ];
 
 class TechOps {
