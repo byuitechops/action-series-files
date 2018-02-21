@@ -23,35 +23,18 @@ class TechOps {
 
 /* Retrieve all items of the type */
 function getItems(course, callback) {
-
-    /* Retrieve an individual item with its html included*/
-    function getItem(file, mapCallback) {
-        canvas.get(`/api/v1/courses/${course.info.canvasOU}/files/${file.id}`, (err, fullItem) => {
-            if (err) {
-                mapCallback(err);
-                return;
-            }
-            mapCallback(null, fullItem[0]);
-        });
-    }
-
     /* Get all of the files from Canvas */
     canvas.getFiles(course.info.canvasOU, (err, items) => {
         if (err) {
             callback(err);
             return;
         }
-
-        /* Get all of the full files with their html */
-        asyncLib.map(items, getItem, (err, fullItems) => {
-
-            /* Give each item the TechOps helper class */
-            fullItems.forEach(it => {
-                it.techops = new TechOps();
-            });
-
-            callback(null, fullItems);
+        /* Give each item the TechOps helper class */
+        items.forEach(it => {
+            it.techops = new TechOps();
         });
+
+        callback(null, items);
     });
 }
 
