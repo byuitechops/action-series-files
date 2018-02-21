@@ -87,7 +87,7 @@ function putItem(course, file, callback) {
         return;
     }
     var putObj = buildPutObj(file);
-    canvas.put(`/api/v1/courses/${course.info.canvasOU}/pages/${page.page_id}`, putObj, (err, newItem) => {
+    canvas.put(`/api/v1/files/${file.id}`, putObj, (err, newItem) => {
         if (err) {
             callback(err);
             return;
@@ -97,19 +97,19 @@ function putItem(course, file, callback) {
 }
 
 function getHTML(item) {
-    return item.body;
+    return null;
 }
 
 function setHTML(item, newHTML) {
-    item.body = newHTML;
+    return null;
 }
 
 function getTitle(item) {
-    return item.title;
+    return item.display_name;
 }
 
 function setTitle(item, newTitle) {
-    item.title = newTitle;
+    item.display_name = newTitle;
 }
 
 function getPosition(item) {
@@ -121,7 +121,7 @@ function setPosition(item, newPosition) {
 }
 
 function getID(item) {
-    return item.page_id;
+    return item.id;
 }
 
 module.exports = {
