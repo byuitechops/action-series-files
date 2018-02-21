@@ -3,7 +3,7 @@ const canvas = require('canvas-wrapper');
 
 /* Actions */
 var actions = [
-    require('../actions/files-delete.js')
+    require('./actions/files-delete.js')
 ];
 
 class TechOps {
