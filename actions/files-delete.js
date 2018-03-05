@@ -8,8 +8,8 @@ module.exports = (course, file, callback) => {
 
     /* Pages to be deleted, in LOWER case */
     var doomedItems = [
-        /smallBanner.jpg/gi,
-        /largeBanner.jpg/gi,
+        /smallBanner.jpg/i,
+        /largeBanner.jpg/i,
     ];
 
     /* The test returns TRUE or FALSE - action() is called if true */
