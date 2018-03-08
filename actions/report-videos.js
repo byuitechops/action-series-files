@@ -1,6 +1,12 @@
 const path = require('path');
 
 module.exports = (course, file, callback) => {
+    /* If the item is marked for deletion, do nothing */
+    if (file.techops.delete === true) {
+        callback(null, course, file);
+        return;
+    }
+
     //array of file extensions that we are checking for 
     var videoFilesExtensions = [
         '.avi',
