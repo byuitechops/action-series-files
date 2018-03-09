@@ -11,8 +11,8 @@ module.exports = (course, file, callback) => {
         /smallBanner.jpg/i,
         /largeBanner.jpg/i,
         /world\s*map.jpg/gi,
-        /${course.info.canvasOU}banner/gi,
-        /${course.info.canvasOU}thumbnail/gi,
+        /${course.info.courseName}banner/gi,
+        /${course.info.courseName}thumbnail/gi,
 
     ];
 
