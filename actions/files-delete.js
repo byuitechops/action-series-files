@@ -29,7 +29,7 @@ module.exports = (course, file, callback) => {
     }
 
     /* If the file is one of the doomed items or is in the list of USED files, delete it */
-    if (typeof found != 'undefined' || course.info.usedFiles.includes(file.display_name)) {
+    if (typeof found != 'undefined' || (course.info.usedFiles.includes(file.display_name) || false)) {
         action();
     } else {
         callback(null, course, file);
