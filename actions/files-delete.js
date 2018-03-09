@@ -11,6 +11,9 @@ module.exports = (course, file, callback) => {
         /smallBanner.jpg/i,
         /largeBanner.jpg/i,
         /world\s*map.jpg/gi,
+        /${canvas.info.canvasOU}banner/gi,
+        /${canvas.info.canvasOU}thumbnail/gi,
+
     ];
 
     /* The test returns TRUE or FALSE - action() is called if true */
@@ -26,7 +29,7 @@ module.exports = (course, file, callback) => {
         callback(null, course, file);
     }
 
-    if (found != undefined) {
+    if (typeof found != "undefined") {
         action();
     } else {
         callback(null, course, file);
