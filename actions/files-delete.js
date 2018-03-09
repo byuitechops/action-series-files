@@ -10,6 +10,7 @@ module.exports = (course, file, callback) => {
     var doomedItems = [
         /smallBanner.jpg/i,
         /largeBanner.jpg/i,
+        /world\s*map.jpg/gi,
     ];
 
     /* The test returns TRUE or FALSE - action() is called if true */
