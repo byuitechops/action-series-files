@@ -13,7 +13,6 @@ module.exports = (course, file, callback) => {
         /world\s*map.jpg/gi,
         /${course.info.courseName}banner/gi,
         /${course.info.courseName}thumbnail/gi,
-
     ];
 
     /* The test returns TRUE or FALSE - action() is called if true */
