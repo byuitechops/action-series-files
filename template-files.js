@@ -57,19 +57,12 @@ function buildPutObj(file) {
     };
 }
 
-function confirmLogs(course, file) {
-    file.techops.logs.forEach(log => {
-        course.log(log.title, log.details);
-    });
-}
-
 function deleteItem(course, file, callback) {
     canvas.delete(`/api/v1/files/${file.id}`, (err) => {
         if (err) {
             callback(err);
             return;
         }
-        confirmLogs(course, file);
         callback(null, null);
     });
 }
@@ -86,7 +79,6 @@ function putItem(course, file, callback) {
             callback(err);
             return;
         }
-        confirmLogs(course, file);
         callback(null, newItem);
     });
 }
