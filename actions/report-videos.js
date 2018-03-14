@@ -20,7 +20,7 @@ module.exports = (course, file, callback) => {
 
     if (videoFilesExtensions.contains(path.extname(file))) {
         //only need to log for now.
-        course.log(`Videos in course: `, {
+        file.techops.log(`Videos in course: `, {
             'File Name': path.basename(file),
             'File Location': path.dirname(file)
         });
