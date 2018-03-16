@@ -7,8 +7,8 @@ module.exports = (course, file, callback) => {
         return;
     }
 
-    //array of file extensions that we are checking for 
-    var videoFilesExtensions = [
+    //array of file extensions that we are checking for
+    var videoExtensions = [
         '.avi',
         '.wmv',
         '.mpg',
@@ -18,11 +18,10 @@ module.exports = (course, file, callback) => {
         '.mp4',
     ];
 
-    if (videoFilesExtensions.contains(path.extname(file))) {
-        //only need to log for now.
-        course.log(`Videos in course: `, {
-            'File Name': path.basename(file),
-            'File Location': path.dirname(file)
+    if (videoExtensions.includes(path.extname(file.display_name))) {
+        file.techops.log('Videos in Course Files', {
+            'Filename': file.display_name,
+            'ID': file.id
         });
     }
 

@@ -1,18 +1,12 @@
 module.exports = (course, file, callback) => {
 
-    /* If the item is marked for deletion, do nothing */
-    if (file.techops.delete === true) {
-        callback(null, course, file);
-        return;
-    }
-
     /* Pages to be deleted, in LOWER case */
     var doomedItems = [
         /smallBanner.jpg/i,
         /largeBanner.jpg/i,
-        /world\s*map.jpg/gi,
-        /${course.info.courseName}banner/gi,
-        /${course.info.courseName}thumbnail/gi,
+        /world\s*map.jpg/i,
+        /${course.info.courseName}banner/i,
+        /${course.info.courseName}thumbnail/i,
     ];
 
     /* The test returns TRUE or FALSE - action() is called if true */
@@ -21,7 +15,7 @@ module.exports = (course, file, callback) => {
     /* This is the action that happens if the test is passed */
     function action() {
         file.techops.delete = true;
-        course.log('Files Deleted', {
+        file.techops.log('Files Deleted', {
             'Title': file.display_name,
             'ID': file.id
         });
@@ -29,7 +23,10 @@ module.exports = (course, file, callback) => {
     }
 
     /* If the file is one of the doomed items or is in the list of USED files, delete it */
-    if (typeof found != 'undefined' || (course.info.usedFiles && course.info.usedFiles.includes(file.display_name))) {
+    if (typeof found != 'undefined' ||
+        (course.info.usedFiles &&
+            course.info.usedFiles.includes(file.display_name) &&
+            file.display_name.includes('.html'))) {
         action();
     } else {
         callback(null, course, file);
