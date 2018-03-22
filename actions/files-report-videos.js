@@ -1,4 +1,4 @@
-const path = require('path');
+const fileType = require('../fileType.js');
 
 module.exports = (course, file, callback) => {
     /* If the item is marked for deletion, do nothing */
@@ -7,18 +7,7 @@ module.exports = (course, file, callback) => {
         return;
     }
 
-    //array of file extensions that we are checking for
-    var videoExtensions = [
-        '.avi',
-        '.wmv',
-        '.mpg',
-        '.mpeg',
-        '.swf',
-        '.mov',
-        '.mp4',
-    ];
-
-    if (videoExtensions.includes(path.extname(file.display_name))) {
+    if (fileType(file.display_name) === 'video') {
         file.techops.log('Videos in Course Files', {
             'Filename': file.display_name,
             'ID': file.id

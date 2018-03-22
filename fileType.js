@@ -1,6 +1,22 @@
+/*******************************************************************
+ * Takes a single filepath and returns the file type as a string.
+ * File types are:
+ * document
+ * video
+ * image
+ * audio
+ * template (for conversion purposes)
+ ******************************************************************/
+
 const path = require('path');
 
+var webExtensions = [
+    '.js',
+    '.css',
+];
+
 var documentExtensions = [
+    '.html',
     '.doc',
     '.docx',
     '.pdf',
@@ -71,12 +87,19 @@ var templateExtensions = [
     'courseBanner.jpg'
 ];
 
-module.exports = (file) => {
-    var ext = path.extname(file.display_name);
+// Will be deleted
+var deletableExtensions = [
+    '.slk'
+];
+
+module.exports = (fileName) => {
+    var ext = path.extname(fileName);
+    if (templateExtensions.includes(ext)) return 'template';
+    if (webExtensions.includes(ext)) return 'web';
     if (documentExtensions.includes(ext)) return 'document';
     if (imageExtensions.includes(ext)) return 'image';
     if (videoExtensions.includes(ext)) return 'video';
     if (audioExtensions.includes(ext)) return 'audio';
-    if (templateExtensions.includes(ext)) return 'template';
+    if (deletableExtensions.includes(ext)) return 'deletable';
     return null;
 };
