@@ -17,31 +17,24 @@ module.exports = (course, file, callback) => {
     var type = fileType(file.display_name);
 
     function action() {
-
         // ARCHIVE - move unused files into archive
         if (course.info.unusedFiles.includes(file.display_name) && course.info.canvasFolders.archive !== -1) {
-            file.parent_folder_id = course.info.canvasFolders.archive;
-
+            file.folder_id = `${course.info.canvasFolders.archive}`;
             // TEMPLATE - move template files into template folder
         } else if (type === 'template' && course.info.canvasFolders.template !== -1) {
-            file.parent_folder_id = course.info.canvasFolders.template;
-
+            file.folder_id = `${course.info.canvasFolders.template}`;
             // ARCHIVE - move web files into the archive
         } else if (type === 'web' && course.info.canvasFolders.template !== -1) {
-            file.parent_folder_id = course.info.canvasFolders.template;
-
+            file.folder_id = `${course.info.canvasFolders.template}`;
             // DOCUMENT - move documents into the documents folder
         } else if (type === 'document' && course.info.canvasFolders.documents !== -1) {
-            file.parent_folder_id = course.info.canvasFolders.documents;
-
+            file.folder_id = `${course.info.canvasFolders.documents}`;
             // MEDIA - move images, audio, and video into the media folder
         } else if ((type === 'image' || type === 'video' || type === 'audio') && course.info.canvasFolders.media !== -1) {
-            file.parent_folder_id = course.info.canvasFolders.media;
-
+            file.folder_id = `${course.info.canvasFolders.media}`;
             // DELETE - Delete this file
         } else if (type === 'deletable') {
             file.techops.delete = true;
-
             file.techops.log('Deleted Files', {
                 'File Name': file.display_name,
                 'ID': file.id,
@@ -53,8 +46,9 @@ module.exports = (course, file, callback) => {
 
         } else {
             course.warning(`${file.display_name} was not moved into one of the four main folders.`);
-            delete file.parent_folder_id;
+            delete file.folder_id;
         }
+
 
         if (type !== undefined) {
             file.techops.log('Moved Files', {
