@@ -6,7 +6,7 @@ module.exports = (course, file, callback) => {
     var validPlatform = validPlatforms.includes(course.settings.platform);
 
     /* If the item is marked for deletion, do nothing */
-    if (file.techops.delete === true || validPlatform !== true) {
+    if (file.techops.delete === true || validPlatform !== true || course.info.reorganizeFiles !== true) {
         callback(null, course, file);
         return;
     }
@@ -71,7 +71,7 @@ module.exports = (course, file, callback) => {
 
     var foldersExist = Object.keys(course.info.canvasFolders).find(key => course.info.canvasFolders[key] !== -1);
 
-    if (foldersExist === undefined && course.info.reorganizeFiles === true) {
+    if (foldersExist === undefined) {
         course.error(new Error('Some or all of the four main folders (documents, media, template, and archive) do not exist in the course. Cannot move files.'));
     }
 
