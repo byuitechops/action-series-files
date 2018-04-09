@@ -1,6 +1,6 @@
 module.exports = (course, file, callback) => {
     //only add the platforms your grandchild should run in
-    var validPlatforms = ['online', 'pathway', 'campus'];  
+    var validPlatforms = ['online', 'pathway'];  
     var validPlatform = validPlatforms.includes(course.settings.platform);
 
     /* If the item is marked for deletion, do nothing */
@@ -42,9 +42,9 @@ module.exports = (course, file, callback) => {
 
     /* If the file is one of the doomed items or is in the list of USED files, delete it */
     if (typeof found != 'undefined' ||
-        (course.info.usedFiles &&
+        course.info.usedFiles &&
             course.info.usedFiles.includes(file.display_name) &&
-            file.display_name.includes('.html'))) {
+            file.display_name.includes('.html')) {
         action();
     } else {
         callback(null, course, file);
