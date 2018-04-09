@@ -1,4 +1,13 @@
 module.exports = (course, file, callback) => {
+    //only add the platforms your grandchild should run in
+    var validPlatforms = ['online', 'pathway', 'campus'];  
+    var validPlatform = validPlatforms.includes(course.settings.platform);
+
+    /* If the item is marked for deletion, do nothing */
+    if (file.techops.delete === true || validPlatform !== true) {
+        callback(null, course, file);
+        return;
+    }
 
     /* Pages to be deleted, in LOWER case */
     var doomedItems = [
@@ -13,7 +22,7 @@ module.exports = (course, file, callback) => {
         /discussion\sforums/gi,
         /setup\s*notes\s*for\s*development\s*team/gi,
         /how\s*to\s*understand\s*due\s*date(s)*/gi,
-        /course\s*schedule\d*\D*archived)?/gi,
+        /course\s*schedule\d*\D*archived/gi,
         new RegExp(`${course.info.courseName}banner`, 'i'),
         new RegExp(`${course.info.courseName}thumbnail`, 'i'),
     ];

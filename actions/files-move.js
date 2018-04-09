@@ -2,6 +2,15 @@ const fileType = require('../fileType.js');
 var warned = false;
 
 module.exports = (course, file, callback) => {
+    //only add the platforms your grandchild should run in
+    var validPlatforms = ['online', 'pathway', 'campus'];  
+    var validPlatform = validPlatforms.includes(course.settings.platform);
+
+    /* If the item is marked for deletion, do nothing */
+    if (file.techops.delete === true || validPlatform !== true) {
+        callback(null, course, file);
+        return;
+    }
 
     // FOR TESTING - PLEASE REMOVE IF THIS IS IN FULL TOOL
     if (!course.info.usedFiles) course.info.usedFiles = ['Guidelines for Buttons.html'];
@@ -70,9 +79,9 @@ module.exports = (course, file, callback) => {
 
     /* If the file is marked to be deleted or the type is null, then ignore it */
     if (file.techops.delete === true || type === null || foldersExist !== undefined) {
-        action();
-    } else {
         callback(null, course, file);
+    } else {
+        action();
     }
 
 };
