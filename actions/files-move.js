@@ -72,7 +72,7 @@ module.exports = (course, file, callback) => {
     var foldersExist = Object.keys(course.info.canvasFolders).find(key => course.info.canvasFolders[key] !== -1);
 
     if (foldersExist === undefined) {
-        course.error(new Error('Some or all of the four main folders (documents, media, template, and archive) do not exist in the course. Cannot move files.'));
+        course.warning('Some or all of the four main folders (documents, media, template, and archive) do not exist in the course. Cannot move files.');
     }
 
     /* If the file is marked to be deleted or the type is null, then ignore it */
