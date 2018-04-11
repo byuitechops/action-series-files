@@ -1,3 +1,7 @@
+/***************************************************************************
+ * Files Report Videos
+ * Description: Report each file that is a video type for logging purposes
+ ***************************************************************************/
 const fileType = require('../fileType.js');
 
 module.exports = (course, file, callback) => {
