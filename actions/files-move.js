@@ -76,10 +76,9 @@ module.exports = (course, file, callback) => {
     }
 
     /* If the file is marked to be deleted or the type is null, then ignore it */
-    if (file.techops.delete === true || type === null || foldersExist !== undefined) {
+    if (file.techops.delete === true || type === null || foldersExist === undefined) {
         callback(null, course, file);
     } else {
         action();
     }
-
 };
