@@ -1,8 +1,9 @@
 const fileType = require('../fileType.js');
+var warned = false;
 
 module.exports = (course, file, callback) => {
     //only add the platforms your grandchild should run in
-    var validPlatforms = ['online', 'pathway', 'campus'];  
+    var validPlatforms = ['online', 'pathway', 'campus'];
     var validPlatform = validPlatforms.includes(course.settings.platform);
 
     /* If the item is marked for deletion, do nothing */
@@ -51,10 +52,10 @@ module.exports = (course, file, callback) => {
 
             callback(null, course, file);
             return;
-
-        } else {
+        } else if (warned === false) {
             course.warning(`${file.display_name} was not moved into one of the four main folders.`);
             delete file.folder_id;
+            warned = true;
         }
 
 
