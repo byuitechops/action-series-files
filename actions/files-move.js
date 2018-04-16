@@ -6,13 +6,6 @@ module.exports = (course, file, callback) => {
     //only add the platforms your grandchild should run in
     var validPlatforms = ['online', 'pathway', 'campus'];
     var validPlatform = validPlatforms.includes(course.settings.platform);
-
-    /* If the item is marked for deletion, do nothing */
-    if (file.techops.delete === true || validPlatform !== true || course.info.reorganizeFiles !== true) {
-        callback(null, course, file);
-        return;
-    }
-
     var type = fileType(file.display_name);
 
     function action() {
@@ -67,8 +60,12 @@ module.exports = (course, file, callback) => {
         folderWarning = true;
     }
 
-    /* If the file is marked to be deleted or the type is null, then ignore it */
-    if (file.techops.delete === true || type === null || foldersExist === false) {
+    /* Ignore this item if any of the below conditions are true */
+    if (file.techops.delete === true ||
+        type === null ||
+        foldersExist === false ||
+        validPlatform === false ||
+        course.settings.reorganizeFiles === false) {
         callback(null, course, file);
     } else {
         action();
