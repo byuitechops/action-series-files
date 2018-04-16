@@ -1,5 +1,6 @@
 const fileType = require('../fileType.js');
 var fileWarning = false;
+var folderWarning = false;
 
 module.exports = (course, file, callback) => {
     //only add the platforms your grandchild should run in
@@ -59,15 +60,15 @@ module.exports = (course, file, callback) => {
         callback(null, course, file);
     }
 
-    var foldersExist = Object.keys(course.info.canvasFolders).find(key => course.info.canvasFolders[key] !== -1);
+    var foldersExist = Object.keys(course.info.canvasFolders).every(key => course.info.canvasFolders[key] !== -1);
 
-    if (foldersExist === undefined || foldersExist === false) {
+    if (foldersExist === false && folderWarning === false) {
         course.warning('Some or all of the four main folders (documents, media, template, and archive) do not exist in the course. Cannot move files.');
-        foldersExist = false;
+        folderWarning = true;
     }
 
     /* If the file is marked to be deleted or the type is null, then ignore it */
-    if (file.techops.delete === true || type === null || foldersExist === undefined) {
+    if (file.techops.delete === true || type === null || foldersExist === false) {
         callback(null, course, file);
     } else {
         action();
