@@ -12,17 +12,6 @@ module.exports = (course, file, callback) => {
         return;
     }
 
-    // FOR TESTING - PLEASE REMOVE IF THIS IS IN FULL TOOL
-    // if (!course.info.usedFiles) course.info.usedFiles = ['Guidelines for Buttons.html'];
-    // if (!course.info.unusedFiles) course.info.unusedFiles = [];
-    // course.info.canvasFolders = {
-    //     media: 96605,
-    //     archive: 96608,
-    //     documents: 96606,
-    //     template: 95921
-    // };
-    // END TESTING
-
     var type = fileType(file.display_name);
 
     function action() {
