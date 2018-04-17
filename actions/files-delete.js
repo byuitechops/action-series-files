@@ -9,12 +9,6 @@ module.exports = (course, file, callback) => {
     var validPlatforms = ['online', 'pathway'];
     var validPlatform = validPlatforms.includes(course.settings.platform);
 
-    /* If the item is marked for deletion, do nothing */
-    if (file.techops.delete === true || validPlatform !== true) {
-        callback(null, course, file);
-        return;
-    }
-
     /* Pages to be deleted, in LOWER case */
     var doomedItems = [
         /smallBanner\.jpg/i,
@@ -46,16 +40,16 @@ module.exports = (course, file, callback) => {
         callback(null, course, file);
     }
 
-    /* Conditions - if any are met, skip this item */
-    if (found === undefined ||
-        file.techops.delete === true ||
-        (course.info.usedFiles &&
-            course.info.usedFiles.includes(file.display_name) &&
-            file.display_name.includes('.html'))) {
-
-        callback(null, course, file);
-    } else {
-        action();
+    function checkDupe() {
+        var usedFiles = course.info.usedFiles.map(usedFile => usedFile.name);
+        return usedFiles.includes(file.display_name) &&
+            file.display_name.includes('.html');
     }
 
+    /* Conditions - if any are met, skip this item */
+    if (checkDupe() === true || (found !== undefined && validPlatform === true)) {
+        action();
+    } else {
+        callback(null, course, file);
+    }
 };
