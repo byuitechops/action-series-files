@@ -6,7 +6,7 @@
  ******************************************************************************/
 module.exports = (course, file, callback) => {
     //only add the platforms your grandchild should run in
-    var validPlatforms = ['online', 'pathway'];  
+    var validPlatforms = ['online', 'pathway'];
     var validPlatform = validPlatforms.includes(course.settings.platform);
 
     /* If the item is marked for deletion, do nothing */
@@ -17,9 +17,9 @@ module.exports = (course, file, callback) => {
 
     /* Pages to be deleted, in LOWER case */
     var doomedItems = [
-        /smallBanner.jpg/i,
-        /largeBanner.jpg/i,
-        /world\s*map.jpg/i,
+        /smallBanner\.jpg/i,
+        /largeBanner\.jpg/i,
+        /world\s*map\.jpg/i,
         /guidelines\s*for\s*button/gi,
         /course\s*search\s*tool/gi,
         /course\s*maintenance\s*request/gi,
@@ -46,14 +46,16 @@ module.exports = (course, file, callback) => {
         callback(null, course, file);
     }
 
-    /* If the file is one of the doomed items or is in the list of USED files, delete it */
-    if (typeof found != 'undefined' ||
-        course.info.usedFiles &&
+    /* Conditions - if any are met, skip this item */
+    if (found === undefined ||
+        file.techops.delete === true ||
+        (course.info.usedFiles &&
             course.info.usedFiles.includes(file.display_name) &&
-            file.display_name.includes('.html')) {
-        action();
-    } else {
+            file.display_name.includes('.html'))) {
+
         callback(null, course, file);
+    } else {
+        action();
     }
 
 };
