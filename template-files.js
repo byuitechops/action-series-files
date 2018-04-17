@@ -60,8 +60,8 @@ function getItems(course, callback) {
 /* Build the PUT object for an item */
 function buildPutObj(file) {
     return {
-        'display_name': file.display_name,
-        'folder_id': file.folder_id,
+        'name': file.display_name,
+        'parent_folder_id': file.folder_id,
         'on_duplicate': 'rename',
         /* rename/overwrite - rename adds a qualifier to make the new filename unique, overwrite replaces the existing 
                                             file with the same name. Without either, uploading a duplicate file will simply fail and we may not know why */

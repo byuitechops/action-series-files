@@ -1,5 +1,4 @@
 const fileType = require('../fileType.js');
-var fileWarning = false;
 var folderWarning = false;
 
 module.exports = (course, file, callback) => {
@@ -42,10 +41,9 @@ module.exports = (course, file, callback) => {
 
             callback(null, course, file);
             return;
-        } else if (fileWarning === false) {
+        } else {
             course.warning(`${file.display_name} was not moved into one of the four main folders.`);
             delete file.folder_id;
-            fileWarning = true;
         }
 
 
