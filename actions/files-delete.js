@@ -41,6 +41,9 @@ module.exports = (course, file, callback) => {
     }
 
     function checkDupe() {
+        if (!course.info.usedFiles) {
+            return false;
+        }
         var usedFiles = course.info.usedFiles.map(usedFile => usedFile.name);
         return usedFiles.includes(file.display_name) &&
             file.display_name.includes('.html');
