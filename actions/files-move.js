@@ -70,7 +70,7 @@ module.exports = (course, file, callback) => {
             action();
         }
     } catch (e) {
-        course.error(e);
+        course.error(new Error(e));
         callback(null, course, file);
     }
 };
