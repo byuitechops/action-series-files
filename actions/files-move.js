@@ -1,5 +1,6 @@
 const fileType = require('../fileType.js');
 var folderWarning = false;
+var moveWarning = false;
 
 module.exports = (course, file, callback) => {
     try {
@@ -57,6 +58,11 @@ module.exports = (course, file, callback) => {
         if (foldersExist === false && folderWarning === false) {
             course.warning('Some or all of the four main folders (documents, media, template, and archive) do not exist in the course. Cannot move files.');
             folderWarning = true;
+        }
+
+        if (course.settings.reorganizeFiles === false && moveWarning === false) {
+            course.warning('The course folder structure was not reorganized, so files will not be moved. (reorganize-file-structure)');
+            moveWarning = true;
         }
 
         /* Ignore this item if any of the below conditions are true */

@@ -42,6 +42,8 @@ var documentExtensions = [
     '.ppt',
     '.pptx',
     '.pps',
+    '.xml',
+    '.ttf',
 ];
 
 var imageExtensions = [
