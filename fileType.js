@@ -59,6 +59,7 @@ var imageExtensions = [
     '.svg',
     '.tif',
     '.tiff',
+    '.pub',
 ];
 
 var videoExtensions = [

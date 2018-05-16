@@ -23,7 +23,7 @@ module.exports = (course, file, callback) => {
             /discussion\sforums/gi,
             /setup\s*notes\s*for\s*development\s*team/gi,
             /how\s*to\s*understand\s*due\s*date(s)*/gi,
-            /course\s*schedule\d*\D*archived/gi,
+            /course\s*schedule/gi,
             new RegExp(`${course.info.courseName}banner`, 'i'),
             new RegExp(`${course.info.courseName}thumbnail`, 'i'),
         ];
