@@ -127,6 +127,7 @@ function getID(item) {
 }
 
 module.exports = {
+    prefix: 'files',
     actions: actions,
     getItems: getItems,
     putItem: putItem,
