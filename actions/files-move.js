@@ -11,7 +11,9 @@ module.exports = (course, file, callback) => {
 
         function action() {
             // ARCHIVE - move unused files into archive
-            if (course.info.unusedFiles.includes(file.display_name) && course.info.canvasFolders.archive !== -1) {
+            if (course.info.unusedFiles.includes(file.display_name) &&
+                course.info.canvasFolders.archive !== -1 &&
+                course.settings.moveUnusedIntoArchive === true) {
                 file.folder_id = `${course.info.canvasFolders.archive}`;
                 // TEMPLATE - move template files into template folder
             } else if (type === 'template' && course.info.canvasFolders.template !== -1) {
@@ -53,7 +55,15 @@ module.exports = (course, file, callback) => {
             callback(null, course, file);
         }
 
-        var foldersExist = Object.keys(course.info.canvasFolders).every(key => course.info.canvasFolders[key] !== -1);
+        var foldersExist = false;
+
+        if (course.settings.moveUnusedIntoArchive === false) {
+            if (course.info.canvasFolders[0] !== -1 &&
+                course.info.canvasFolders[1] !== -1 &&
+                course.info.canvasFolders[2] !== -1) {
+                foldersExist = true;
+            }
+        }
 
         if (foldersExist === false && folderWarning === false) {
             course.warning('Some or all of the four main folders (documents, media, template, and archive) do not exist in the course. Cannot move files.');
