@@ -42,6 +42,8 @@ var documentExtensions = [
     '.ppt',
     '.pptx',
     '.pps',
+    '.xml',
+    '.ttf',
 ];
 
 var imageExtensions = [
@@ -57,6 +59,7 @@ var imageExtensions = [
     '.svg',
     '.tif',
     '.tiff',
+    '.pub',
 ];
 
 var videoExtensions = [
@@ -93,7 +96,7 @@ var deletableExtensions = [
 ];
 
 module.exports = (fileName) => {
-    var ext = path.extname(fileName);
+    var ext = path.extname(fileName.toLowerCase());
     if (templateExtensions.includes(ext)) return 'template';
     if (webExtensions.includes(ext)) return 'web';
     if (documentExtensions.includes(ext)) return 'document';
