@@ -22,10 +22,14 @@ module.exports = (course, file, callback) => {
                 'ID': file.id
             });
         }
-        
+
         callback(null, course, file);
     } catch (e) {
         course.error(new Error(e));
         callback(null, course, file);
     }
 };
+
+module.exports.details = {
+    title: 'files-report-videos'
+}

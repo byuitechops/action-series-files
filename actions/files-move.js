@@ -90,3 +90,7 @@ module.exports = (course, file, callback) => {
         callback(null, course, file);
     }
 };
+
+module.exports.details = {
+    title: 'files-move'
+}
