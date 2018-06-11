@@ -4,9 +4,6 @@ var moveWarning = false;
 
 module.exports = (course, file, callback) => {
     try {
-        //only add the platforms your grandchild should run in
-        var validPlatforms = ['online', 'pathway', 'campus'];
-        var validPlatform = validPlatforms.includes(course.settings.platform);
         var type = fileType(file.display_name);
 
         function action() {
@@ -79,7 +76,6 @@ module.exports = (course, file, callback) => {
         if (file.techops.delete === true ||
             type === null ||
             foldersExist === false ||
-            validPlatform === false ||
             course.settings.reorganizeFiles === false) {
             callback(null, course, file);
         } else {

@@ -6,12 +6,12 @@ const fileType = require('../fileType.js');
 
 module.exports = (course, file, callback) => {
     try {
-        //only add the platforms your grandchild should run in
-        var validPlatforms = ['online', 'pathway', 'campus'];
-        var validPlatform = validPlatforms.includes(course.settings.platform);
 
-        /* If the item is marked for deletion or isn't a valid platform type, do nothing */
-        if (file.techops.delete === true || validPlatform !== true) {
+
+
+
+        /* If the item is marked for deletion, do nothing */
+        if (file.techops.delete === true) {
             callback(null, course, file);
             return;
         }

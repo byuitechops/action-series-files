@@ -6,9 +6,9 @@
  ******************************************************************************/
 module.exports = (course, file, callback) => {
     try {
-        //only add the platforms your grandchild should run in
-        var validPlatforms = ['online', 'pathway'];
-        var validPlatform = validPlatforms.includes(course.settings.platform);
+
+
+
 
         /* Pages to be deleted, in LOWER case */
         var doomedItems = [
@@ -51,7 +51,7 @@ module.exports = (course, file, callback) => {
         }
 
         /* Conditions - if any are met, skip this item */
-        if (checkDupe() === true || (found !== undefined && validPlatform === true)) {
+        if (checkDupe() === true || found !== undefined) {
             action();
         } else {
             callback(null, course, file);
